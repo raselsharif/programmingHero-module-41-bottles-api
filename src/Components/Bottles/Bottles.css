@@ -8,3 +8,14 @@
 .bottles-container img {
     width: 100%;
 }
+
+.purchase-btn {
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.carts-container img {
+    width: 150px;
+    margin-right: 10px;
+}
