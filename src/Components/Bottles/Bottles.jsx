@@ -14,9 +14,19 @@ const Bottles = () => {
       .then((data) => setBottles(data));
   }, []);
   useEffect(() => {
-    const storedCart = getFromLS();
-    console.log(storedCart);
-  }, []);
+    if (bottles) {
+      const storedCart = getFromLS();
+      const saveCart = [];
+      for (const id of storedCart) {
+        const bottle = bottles.find((bottle) => bottle.id === id);
+        if (bottle) {
+          saveCart.push(bottle);
+        }
+      }
+      setCarts(saveCart);
+    }
+  }, [bottles]);
+
   //  load data from localStorage
   const addToCartHandler = (bottle) => {
     setCarts([...carts, bottle]);
