@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import Bottle from "../Bottle/Bottle";
 import "./Bottles.css";
-import { addToLS, getFromLS } from "../../../public/utilities/SaveLs";
+import {
+  addToLS,
+  getFromLS,
+  removeFromLS,
+} from "../../../public/utilities/SaveLs";
 
 const Bottles = () => {
   const [bottles, setBottles] = useState([]);
@@ -33,13 +37,21 @@ const Bottles = () => {
     addToLS(bottle.id);
   };
 
+  const removeFromCart = (id) => {
+    const remainingCart = carts.filter((bottle) => bottle.id !== id);
+    setCarts(remainingCart);
+    removeFromLS(id);
+  };
   return (
     <div>
       <h3>Available Bottles: {bottles.length}</h3>
       <h3>Available Carts: {carts.length}</h3>
       <div className="carts-container">
         {carts.map((cart, idx) => (
-          <img key={idx} src={cart.img}></img>
+          <div key={idx} className="cart">
+            <img src={cart.img}></img>
+            <button onClick={() => removeFromCart(cart.id)}>Remove</button>
+          </div>
         ))}
       </div>
       <div className="bottles-container">
